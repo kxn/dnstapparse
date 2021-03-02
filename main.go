@@ -56,7 +56,7 @@ func loadZoneFile(file string) error {
 	zonemap := map[string]bool{}
 	scanner := bufio.NewScanner(f)
 	for scanner.Scan() {
-		line := scanner.Text()
+		line := strings.ToLower(scanner.Text())
 		if strings.Contains(line, "local-zone:") {
 			m := zoneRe.FindAllStringSubmatch(line, 1)
 			if m != nil && len(m) == 1 && len(m[0]) == 3 && m[0][2] == "redirect" {
@@ -67,9 +67,9 @@ func loadZoneFile(file string) error {
 		if strings.Contains(line, "local-data:") {
 			m := dataRe.FindAllStringSubmatch(line, 1)
 			if m != nil && len(m) == 1 && len(m[0]) == 2 {
-				m1 := aRe.FindAllStringSubmatch(line, 1)
+				m1 := aRe.FindAllStringSubmatch(m[0][1], 1)
 				if m1 != nil {
-					if isProxyIP(m[0][3]) {
+					if isProxyIP(m1[0][3]) {
 						hostlist[normalize(m1[0][1])] = true
 					}
 				}
