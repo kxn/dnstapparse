@@ -9,14 +9,11 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Generate build files
-      uses: thatisuday/go-cross-build@v1
-      with:
-         platforms: 'linux/amd64, linux/arm64, windows/amd64'
-         package: ''
-         name: 'dnstapparse'
-         compress: 'true'
-         dest: '.'
+    - name: build
+      run: |
+        GOOS=linux GOARCH=arm64 go build -o dnstapparse-linux-arm64 .
+        GOOS=linux GOARCH=amd64 go build -o dnstapparse-linux-amd64 .
+        GOOS=windows GOARCH=amd64 go build -o dnstapparse-windows-amd64.exe .
 
     - name: github-action-publish-binaries
       uses: skx/github-action-publish-binaries@release-0.15
