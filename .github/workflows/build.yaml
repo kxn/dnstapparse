@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - 'master'
-    paths:
-      - '**.go'
 
 jobs:
   build:
@@ -13,7 +11,8 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@master
+        
       - name: build
-        run: go build -v 
+        run: go build -o dnstapparse . 
 
 
