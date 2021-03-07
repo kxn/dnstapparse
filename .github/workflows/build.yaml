@@ -13,6 +13,6 @@ jobs:
         uses: actions/checkout@master
         
       - name: build
-        run: go build -o dnstapparse . 
+        run: GOOS=windows GOARCH=amd64 go build -o dnstapparse.exe . 
 
 
