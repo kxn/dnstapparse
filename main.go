@@ -19,7 +19,7 @@ var (
 	zoneList   = []string{}
 	hostlist   = map[string]bool{}
 	quiet      = flag.Bool("quiet", false, "do not print dnstap messages on stdout")
-	listenAddr = flag.String("listen", "127.0.0.1:5678", "address to listen to")
+	listenAddr = flag.String("listen", "127.0.0.1:56789", "address to listen to")
 	zoneFile   = flag.String("zonefile", "/etc/unbound/local.d/dns.conf", "unbound local-data file")
 	proxyIPs   = flag.String("proxyips", "", "ip list of proxies, separated by comma")
 	proxyList  map[string]bool
